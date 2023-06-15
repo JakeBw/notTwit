@@ -64,9 +64,38 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         configureUI()
     }
+    
     @objc func handleLogin() {
-        print("Login handler activated")
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        AuthService.shared.logUserIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Error logging in \(error.localizedDescription)")
+                return
+            }
+            print("Logged in!")
+            
+            var firstKeyWindowForConnectedScenes: UIWindow? {
+                UIApplication.shared
+                    // Of all connected scenes...
+                    .connectedScenes.lazy
+
+                    // ... grab all foreground active window scenes ...
+                    .compactMap { $0.activationState == .foregroundActive ? ($0 as? UIWindowScene) : nil }
+
+                    // ... finding the first one which has a key window ...
+                    .first(where: { $0.keyWindow != nil })?
+
+                    // ... and return that window.
+                    .keyWindow
+            }
+            firstKeyWindowForConnectedScenes?.rootViewController = MainTabController()
+            MainTabController().authenticateUserAndConfigureUI()
+
+            self.dismiss(animated: true, completion: nil)
+        }
     }
+    
     
     @objc func handleShowSignUp() {
         let controller = RegistrationController()

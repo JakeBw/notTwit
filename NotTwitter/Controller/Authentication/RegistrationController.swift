@@ -5,10 +5,14 @@
 //  Created by Jake on 2023-06-15.
 //
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class RegistrationController: UIViewController {
     
     private let imageSelector = UIImagePickerController()
+    private var profileImage: UIImage?
     
     private let addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -58,7 +62,7 @@ class RegistrationController: UIViewController {
     }()
     
     private let fullnameTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "Fullname")
+        let tf = Utilities().textField(withPlaceholder: "Full Name")
         
         return tf
     }()
@@ -97,11 +101,43 @@ class RegistrationController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func handleProfilePhoto() {
-        print("Select a profile picture")
         present(imageSelector, animated: true, completion: nil)
     }
+    
     @objc func handleRegistration() {
+        guard let profileImage = profileImage else {
+            print("DEBUG: Please select a profile picture")
+            return
+        }
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let name = fullnameTextField.text else { return }
+        guard let username = usernameTextField.text else { return}
         
+        let credentials = AuthCredentials(email: email, password: password, fullname: name, username: username, profileImage: profileImage)
+        AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
+            print("DEBUG: Handle updating the UI")
+            
+            var firstKeyWindowForConnectedScenes: UIWindow? {
+                UIApplication.shared
+                    // Of all connected scenes...
+                    .connectedScenes.lazy
+
+                    // ... grab all foreground active window scenes ...
+                    .compactMap { $0.activationState == .foregroundActive ? ($0 as? UIWindowScene) : nil }
+
+                    // ... finding the first one which has a key window ...
+                    .first(where: { $0.keyWindow != nil })?
+
+                    // ... and return that window.
+                    .keyWindow
+            }
+            firstKeyWindowForConnectedScenes?.rootViewController = MainTabController()
+            MainTabController().authenticateUserAndConfigureUI()
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        }
     }
     
     func configureUI() {
@@ -138,6 +174,7 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
+        self.profileImage = profileImage
         
         addPhotoButton.layer.cornerRadius = 64
         addPhotoButton.layer.masksToBounds = true
