@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		330A0DFA2A3B3FD300E2A53D /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330A0DF92A3B3FD300E2A53D /* FeedController.swift */; };
+		330A0DFC2A3B3FF200E2A53D /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330A0DFB2A3B3FF200E2A53D /* ExploreController.swift */; };
+		330A0DFE2A3B3FFF00E2A53D /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330A0DFD2A3B3FFF00E2A53D /* NotificationsController.swift */; };
+		330A0E002A3B400E00E2A53D /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330A0DFF2A3B400E00E2A53D /* ConversationsController.swift */; };
 		3353DF592A221A2200B1F42A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF582A221A2200B1F42A /* AppDelegate.swift */; };
 		3353DF5B2A221A2200B1F42A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF5A2A221A2200B1F42A /* SceneDelegate.swift */; };
-		3353DF5D2A221A2200B1F42A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF5C2A221A2200B1F42A /* ViewController.swift */; };
 		3353DF602A221A2200B1F42A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3353DF5E2A221A2200B1F42A /* Main.storyboard */; };
 		3353DF622A221A2300B1F42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3353DF612A221A2300B1F42A /* Assets.xcassets */; };
 		3353DF652A221A2300B1F42A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3353DF632A221A2300B1F42A /* LaunchScreen.storyboard */; };
 		3353DF702A221A2300B1F42A /* NotTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF6F2A221A2300B1F42A /* NotTwitterTests.swift */; };
 		3353DF7A2A221A2300B1F42A /* NotTwitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF792A221A2300B1F42A /* NotTwitterUITests.swift */; };
 		3353DF7C2A221A2300B1F42A /* NotTwitterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF7B2A221A2300B1F42A /* NotTwitterUITestsLaunchTests.swift */; };
+		3353DF902A221BE000B1F42A /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DF8F2A221BE000B1F42A /* MainTabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		330A0DF92A3B3FD300E2A53D /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		330A0DFB2A3B3FF200E2A53D /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		330A0DFD2A3B3FFF00E2A53D /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
+		330A0DFF2A3B400E00E2A53D /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 		3353DF552A221A2200B1F42A /* NotTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3353DF582A221A2200B1F42A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3353DF5A2A221A2200B1F42A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3353DF5C2A221A2200B1F42A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3353DF5F2A221A2200B1F42A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3353DF612A221A2300B1F42A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3353DF642A221A2300B1F42A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +56,7 @@
 		3353DF752A221A2300B1F42A /* NotTwitterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotTwitterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3353DF792A221A2300B1F42A /* NotTwitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotTwitterUITests.swift; sourceTree = "<group>"; };
 		3353DF7B2A221A2300B1F42A /* NotTwitterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotTwitterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3353DF8F2A221BE000B1F42A /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +107,14 @@
 		3353DF572A221A2200B1F42A /* NotTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				3353DF8D2A221A8300B1F42A /* Model */,
+				3353DF8C2A221A8100B1F42A /* View */,
+				3353DF8B2A221A8000B1F42A /* ViewModel */,
+				3353DF8A2A221A7F00B1F42A /* Controller */,
+				3353DF882A221A6500B1F42A /* API */,
+				3353DF8E2A221AD800B1F42A /* Utils */,
 				3353DF582A221A2200B1F42A /* AppDelegate.swift */,
 				3353DF5A2A221A2200B1F42A /* SceneDelegate.swift */,
-				3353DF5C2A221A2200B1F42A /* ViewController.swift */,
 				3353DF5E2A221A2200B1F42A /* Main.storyboard */,
 				3353DF612A221A2300B1F42A /* Assets.xcassets */,
 				3353DF632A221A2300B1F42A /* LaunchScreen.storyboard */,
@@ -125,6 +138,53 @@
 				3353DF7B2A221A2300B1F42A /* NotTwitterUITestsLaunchTests.swift */,
 			);
 			path = NotTwitterUITests;
+			sourceTree = "<group>";
+		};
+		3353DF882A221A6500B1F42A /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		3353DF8A2A221A7F00B1F42A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3353DF8F2A221BE000B1F42A /* MainTabController.swift */,
+				330A0DF92A3B3FD300E2A53D /* FeedController.swift */,
+				330A0DFB2A3B3FF200E2A53D /* ExploreController.swift */,
+				330A0DFD2A3B3FFF00E2A53D /* NotificationsController.swift */,
+				330A0DFF2A3B400E00E2A53D /* ConversationsController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3353DF8B2A221A8000B1F42A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3353DF8C2A221A8100B1F42A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3353DF8D2A221A8300B1F42A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3353DF8E2A221AD800B1F42A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3353DF5D2A221A2200B1F42A /* ViewController.swift in Sources */,
+				330A0DFE2A3B3FFF00E2A53D /* NotificationsController.swift in Sources */,
+				330A0E002A3B400E00E2A53D /* ConversationsController.swift in Sources */,
 				3353DF592A221A2200B1F42A /* AppDelegate.swift in Sources */,
+				330A0DFC2A3B3FF200E2A53D /* ExploreController.swift in Sources */,
 				3353DF5B2A221A2200B1F42A /* SceneDelegate.swift in Sources */,
+				3353DF902A221BE000B1F42A /* MainTabController.swift in Sources */,
+				330A0DFA2A3B3FD300E2A53D /* FeedController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

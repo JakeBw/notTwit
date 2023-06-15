@@ -4,5 +4,15 @@
 //
 //  Created by Jake on 2023-06-15.
 //
+import UIKit
 
-import Foundation
+class ConversationsController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        view.backgroundColor = .lightGray
+        
+    }
+
+}
