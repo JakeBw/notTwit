@@ -9,14 +9,24 @@ import UIKit
 
 class MainTabController: UITabBarController {
 
+    let actionButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.backgroundColor = .twitterBlue
+        button.setImage(UIImage(named: "new_tweet"), for: .normal)
+        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewControllers()
         uiTabBarSetting()
-        
-
-
-        // Do any additional setup after loading the view.
+        configureUI()
+    }
+    
+    @objc func actionButtonTapped() {
+        print("To be worked on later")
     }
     
     func uiTabBarSetting() {
@@ -27,6 +37,13 @@ class MainTabController: UITabBarController {
             tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = appearance
         }
+    }
+    
+    func configureUI() {
+        view.addSubview(actionButton)
+        actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
+                            paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        actionButton.layer.cornerRadius = 56 / 2
     }
     
     func templateNavigationController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController {
@@ -57,12 +74,12 @@ class MainTabController: UITabBarController {
         
         let notifications = NotificationsController()
         let nav3 = templateNavigationController(image: UIImage?.none, rootViewController: notifications)
-        nav3.tabBarItem.image = UIImage(named: "search_unselected")
+        nav3.tabBarItem.image = UIImage(named: "like_unselected")
         nav3.title = "Notifications"
         
         let conversations = ConversationsController()
         let nav4 = templateNavigationController(image: UIImage?.none, rootViewController: conversations)
-        nav4.tabBarItem.image = UIImage(named: "search_unselected")
+        nav4.tabBarItem.image = UIImage(named: "mail 1")
         nav4.title = "Messages"
         
         viewControllers = [nav1, nav2, nav3, nav4]
