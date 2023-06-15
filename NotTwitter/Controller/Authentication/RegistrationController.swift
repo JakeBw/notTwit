@@ -8,6 +8,8 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
+    private let imageSelector = UIImagePickerController()
+    
     private let addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo"), for: .normal)
@@ -74,6 +76,18 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    private let signupButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Create Account", for: .normal)
+        button.setTitleColor(.twitterBlue, for: .normal)
+        button.backgroundColor = .white
+        button.heightAnchor.constraint(lessThanOrEqualToConstant: 50).isActive = true
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -84,10 +98,19 @@ class RegistrationController: UIViewController {
     }
     @objc func handleProfilePhoto() {
         print("Select a profile picture")
+        present(imageSelector, animated: true, completion: nil)
+    }
+    @objc func handleRegistration() {
+        
     }
     
     func configureUI() {
+        
         view.backgroundColor = .twitterBlue
+        
+        imageSelector.delegate = self
+        imageSelector.allowsEditing = true
+        
         view.addSubview(addPhotoButton)
         addPhotoButton.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor)
         addPhotoButton.setDimensions(width: 150, height: 150)
@@ -95,7 +118,8 @@ class RegistrationController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [fullnameContainer,
                                                    usernameContainer,
                                                    emailContainer,
-                                                   passwordContainer])
+                                                   passwordContainer,
+                                                  signupButton])
         stack.axis = .vertical
         stack.spacing = 20
         stack.distribution = .fillEqually
@@ -109,4 +133,21 @@ class RegistrationController: UIViewController {
                                 paddingLeft: 40, paddingRight: 40)
     }
     
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let profileImage = info[.editedImage] as? UIImage else { return }
+        
+        addPhotoButton.layer.cornerRadius = 64
+        addPhotoButton.layer.masksToBounds = true
+        addPhotoButton.imageView?.contentMode = .scaleToFill
+        addPhotoButton.imageView?.clipsToBounds = true
+        addPhotoButton.layer.borderColor = UIColor.white.cgColor
+        addPhotoButton.layer.borderWidth = 3
+        
+        self.addPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
