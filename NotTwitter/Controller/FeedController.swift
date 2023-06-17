@@ -7,8 +7,9 @@
 import UIKit
 import SDWebImage
 
+private let reuseIdentifier = "TweetCell"
 
-class FeedController: UIViewController {
+class FeedController: UICollectionViewController {
     
     var user: User? {
         didSet {
@@ -16,11 +17,23 @@ class FeedController: UIViewController {
             print("Set in feed controller!")
         }
     }
+    
+    private var tweets = [Tweet]() {
+        didSet { collectionView.reloadData() }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        fetchTweets()
     }
+    
+    func fetchTweets() {
+        TweetService.shared.fetchTweets { tweets in
+            self.tweets = tweets
+        }
+    }
+    
     func configureUI() {
         view.backgroundColor = .white
         
@@ -28,6 +41,7 @@ class FeedController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.setDimensions(width: 44, height: 44)
         navigationItem.titleView = imageView
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
     }
     func configureLeftBarButton() {
@@ -44,5 +58,24 @@ class FeedController: UIViewController {
         profileImageView.sd_setImage(with: url, completed: nil)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
+    }
+}
+
+extension FeedController {
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tweets.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        return cell
+    }
+    
+}
+
+extension FeedController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 125)
     }
 }
