@@ -44,6 +44,7 @@ class FeedController: UICollectionViewController {
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
     }
+    
     func configureLeftBarButton() {
         guard let user = user else { return }
         
@@ -69,6 +70,12 @@ extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        
+        cell.tweet = tweets[indexPath.row]
+        print(indexPath.row)
+        
+        
+        
         return cell
     }
     

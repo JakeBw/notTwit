@@ -18,7 +18,7 @@ class MainTabController: UITabBarController {
             print("Set in maintab controller!")
         }
     }
-
+    
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -31,12 +31,13 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateUserAndConfigureUI()
-        //logout()
     }
     
     func fetchUser() {
-        UserService.shared.fetchUser { user in
-            self.user = user
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        UserService.shared.fetchUser(uid: uid) { user in
+                self.user = user
         }
     }
     
