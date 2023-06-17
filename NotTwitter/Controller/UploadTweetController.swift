@@ -40,6 +40,8 @@ class UploadTweetController: UIViewController {
         return iv
     }()
     
+    private let captionTextView = CaptionTextView()
+    
     init(user: User) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -59,16 +61,30 @@ class UploadTweetController: UIViewController {
     }
     
     @objc func handleUploadTweet() {
-        
+        guard let caption = captionTextView.text else { return }
+        TweetService.shared.uploadTweet(caption: caption) { (error, ref) in
+            print("Tweet uploaded to DB")
+            
+            if let error = error {
+                print("Failed to upload tweet with \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true)
+        }
     }
     
+
     func configureUI() {
         view.backgroundColor = .white
         configureNavigationBar()
         
-        view.addSubview(profileImageView)
-        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                                paddingTop: 16, paddingLeft: 16)
+        let stack = UIStackView(arrangedSubviews: [profileImageView, captionTextView])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                                paddingTop: 16, paddingLeft: 16, paddingRight: 16)
         
         guard let url = URL(string: user.profileImageUrl) else { return }
         profileImageView.sd_setImage(with: url, completed: nil)
@@ -84,3 +100,4 @@ class UploadTweetController: UIViewController {
     }
     
 }
+
