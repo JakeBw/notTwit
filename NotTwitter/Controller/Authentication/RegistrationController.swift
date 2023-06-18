@@ -32,9 +32,10 @@ class RegistrationController: UIViewController {
     private lazy var passwordContainer: UIView = {
         let image = UIImage(imageLiteralResourceName: "lock")
         let view = Utilities().inputContainterView(withImage: image, textField: passwordTextField)
-    
+        
         return view
     }()
+    
     private lazy var fullnameContainer: UIView = {
         let image = UIImage(imageLiteralResourceName: "mail 1")
         let view = Utilities().inputContainterView(withImage: image, textField: fullnameTextField)
@@ -45,7 +46,7 @@ class RegistrationController: UIViewController {
     private lazy var usernameContainer: UIView = {
         let image = UIImage(imageLiteralResourceName: "lock")
         let view = Utilities().inputContainterView(withImage: image, textField: usernameTextField)
-    
+        
         return view
     }()
     
@@ -112,7 +113,7 @@ class RegistrationController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         guard let name = fullnameTextField.text else { return }
-        guard let username = usernameTextField.text else { return}
+        guard let username = usernameTextField.text?.lowercased() else { return}
         
         let credentials = AuthCredentials(email: email, password: password, fullname: name, username: username, profileImage: profileImage)
         AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
@@ -120,16 +121,16 @@ class RegistrationController: UIViewController {
             
             var firstKeyWindowForConnectedScenes: UIWindow? {
                 UIApplication.shared
-                    // Of all connected scenes...
+                // Of all connected scenes...
                     .connectedScenes.lazy
-
-                    // ... grab all foreground active window scenes ...
+                
+                // ... grab all foreground active window scenes ...
                     .compactMap { $0.activationState == .foregroundActive ? ($0 as? UIWindowScene) : nil }
-
-                    // ... finding the first one which has a key window ...
+                
+                // ... finding the first one which has a key window ...
                     .first(where: { $0.keyWindow != nil })?
-
-                    // ... and return that window.
+                
+                // ... and return that window.
                     .keyWindow
             }
             firstKeyWindowForConnectedScenes?.rootViewController = MainTabController()
@@ -155,7 +156,7 @@ class RegistrationController: UIViewController {
                                                    usernameContainer,
                                                    emailContainer,
                                                    passwordContainer,
-                                                  signupButton])
+                                                   signupButton])
         stack.axis = .vertical
         stack.spacing = 20
         stack.distribution = .fillEqually
@@ -166,7 +167,7 @@ class RegistrationController: UIViewController {
         
         view.addSubview(alreadyHaveAnAccount)
         alreadyHaveAnAccount.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
-                                paddingLeft: 40, paddingRight: 40)
+                                    paddingLeft: 40, paddingRight: 40)
     }
     
 }

@@ -18,7 +18,7 @@ class MainTabController: UITabBarController {
             print("Set in maintab controller!")
         }
     }
-
+    
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -31,17 +31,23 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateUserAndConfigureUI()
-        logout()
     }
     
     func fetchUser() {
-        UserService.shared.fetchUser { user in
-            self.user = user
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        UserService.shared.fetchUser(uid: uid) { user in
+                self.user = user
         }
     }
     
     @objc func actionButtonTapped() {
         print("To be worked on later")
+        guard let user = user else { return }
+        let controller = UploadTweetController(user: user)
+        let nav = templateNavigationController(image: UIImage?.none, rootViewController:controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
     func authenticateUserAndConfigureUI() {
@@ -91,8 +97,8 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.image = image
         
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
+        //appearance.configureWithOpaqueBackground()
+        //appearance.backgroundColor = .white
         
         nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
@@ -102,7 +108,7 @@ class MainTabController: UITabBarController {
     
     func configureViewControllers() {
         
-        let feed = FeedController()
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav1 = templateNavigationController(image: UIImage?.none, rootViewController: feed)
         nav1.tabBarItem.image = UIImage(named: "home_unselected")
         nav1.title = "Home"
