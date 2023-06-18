@@ -2,13 +2,13 @@
 
 This project was started as a way to learn more about Swift, using xcode and firebase. So far the ios eco system has made things very confusing, every guide / instructed course / blog post I have read on making this is full of deprecated code making it a little more challenging. Anchoring UI elements to another has been a ton of build - start - stop - edit - build - start - stop.
 
-# Features
+## Features
 - Registering new users with a fullname, user, email, password and profile picture
 - Login to created accounts
 - Create new tweets
 - Update the main feed to show all new tweets instantly with the associated user details with it
 
-# Features Being Developed
+## Features Being Developed
 - Click profile pictures on the main feed and go to their user profile
 - Search feature to find other accounts
 - Fix feed to display only followed users posts and sort them by newest
