@@ -8,7 +8,7 @@ This project was started as a way to learn more about Swift, using xcode and fir
 - Create new tweets
 - Update the main feed to show all new tweets instantly with the associated user details with it
 
-# Coming soon
+# Features Being Developed
 - Click profile pictures on the main feed and go to their user profile
 - Search feature to find other accounts
 - Fix feed to display only followed users posts and sort them by newest
